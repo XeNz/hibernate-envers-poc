@@ -1,5 +1,6 @@
 package io.bootify.audit_test.config;
 
+import io.bootify.audit_test.listeners.CustomEnversPostInsertEventListenerImpl;
 import io.bootify.audit_test.listeners.CustomEnversPreInsertEventListenerImpl;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.envers.boot.internal.EnversService;
@@ -23,7 +24,8 @@ public class AuditingConfig {
         EventListenerRegistry registry = sessionFactory.getServiceRegistry().getService(EventListenerRegistry.class);
         EnversService enversService = sessionFactory.getServiceRegistry().getService(EnversService.class);
 
-        registry.getEventListenerGroup(EventType.PRE_INSERT).appendListener(new CustomEnversPreInsertEventListenerImpl());
+        //registry.getEventListenerGroup(EventType.PRE_INSERT).appendListener(new CustomEnversPreInsertEventListenerImpl());
+        registry.getEventListenerGroup(EventType.POST_INSERT).appendListener(new CustomEnversPostInsertEventListenerImpl(enversService));
 //            registry.getEventListenerGroup(EventType.PRE_UPDATE).appendListener(new CustomEnversPreUpdateEventListenerImpl(enversService));
 //            registry.getEventListenerGroup(EventType.POST_UPDATE).appendListener(new CustomPostUpdateEventListener(enversService));
 //            registry.getEventListenerGroup(EventType.PRE_COLLECTION_UPDATE).appendListener(new CustomPreUpdateCollectionListener(enversService));
