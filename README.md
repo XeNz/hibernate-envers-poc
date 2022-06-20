@@ -15,3 +15,4 @@ Launch Spring boot Application using dev profile
 * Be sure to match the Envers version to the Hibernate version you are currently using
 * I don't really see a concrete use case for custom listeners yet, unless you would want to not auto register the
   default listeners
+* Conditional logic can be done by overriding EnversXXXEventListenerImpl. Checking request context can be done using RequestContextHolder
